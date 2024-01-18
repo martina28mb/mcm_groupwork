@@ -119,3 +119,72 @@ def rovigo():
         str: Rendered HTML content for the Rovigo page.
     """
     return render_template('rovigo.html')
+
+@app.route('/internal', methods=['GET', 'POST'])
+def internal():
+    """
+    Render the internal search page.
+
+    Returns:
+        str: Rendered HTML content for the internal search page.
+    """
+    form = QueryForm()
+    error_message = None
+
+    if form.validate_on_submit():
+        comune = form.destination.data
+
+        """Obtain checkbox's values from form."""
+        piscina_filter = form.piscina_checkbox.data
+        accesso_disabili_filter = form.accesso_disabili_checkbox.data
+        fitness_filter = form.fitness_checkbox.data
+        sauna_filter = form.sauna_checkbox.data
+        aria_condizionata_filter = form.aria_condizionata_checkbox.data
+        lago_filter = form.lago_checkbox.data
+
+        """Update URL to include filters"""
+        fastapi_url = f'{FASTAPI_BACKEND_HOST}/query/{comune}?piscina={piscina_filter}&accesso_disabili={accesso_disabili_filter}&fitness={fitness_filter}&sauna={sauna_filter}&aria_condizionata={aria_condizionata_filter}&lago={lago_filter}'
+
+        """Make a GET request to the FastAPI backend."""
+        response = requests.get(fastapi_url)
+
+        if response.status_code == 200:
+            """Extract and display the result from the FastAPI backend."""
+            data = response.json()
+            accomodations = data.get('risultati', [])
+
+            if accomodations:
+                result_strutture = []
+                for struttura in accomodations:
+                    result_item = {"nome": struttura["nome"]}
+                    if "link" in struttura:
+                        result_item["link"] = struttura["link"]
+                    if "indirizzo" in struttura:
+                        result_item["indirizzo"] = struttura["indirizzo"]
+                    if "telefono" in struttura:
+                        result_item["telefono"] = struttura["telefono"]
+                    if "email" in struttura:
+                        result_item["email"] = struttura["email"]
+                    result_strutture.append(result_item)
+
+                # Debug print to check the value of result_strutture
+                print("Result_strutture:", result_strutture)
+
+                if not result_strutture:
+                    result_strutture = [{"nome": f'No accommodations available for {comune}'}]
+            else:
+                result_strutture = [{"nome": f'No accommodations available for {comune}'}]
+
+            """Extract museum's information."""
+            musei_consigliati = data.get('musei_consigliati', [])
+            result_musei = ', '.join(musei_consigliati) if musei_consigliati else f'No recommended museums for {comune}'
+
+            return render_template('internal.html', form=form, result_strutture=result_strutture, result_musei=result_musei, error_message=error_message)
+        else:
+            error_message = f'Error: Unable to fetch accommodations for {comune} from FastAPI Backend'
+
+    return render_template('internal.html', form=form, result_strutture=None, result_musei=None, error_message=error_message)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80, debug=True)
