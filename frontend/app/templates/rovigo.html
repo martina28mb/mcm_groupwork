@@ -9,7 +9,7 @@
     <!-- Linking Stylesheets-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/padova.css">
-    
+
     <!-- Styling initial images-->
     <style>
         .jumbotron {
@@ -50,6 +50,32 @@
         <h2>Discover the Beauty</h2>
         <p>Rovigo's culinary scene is influenced by the bounty of its agricultural surroundings, with local dishes showcasing the flavors of fresh produce and rice, a regional specialty. The town's unhurried pace, vibrant traditions, and welcoming atmosphere make it a delightful destination for those seeking an authentic Italian experience.</p>
     </div>
+
+    <!-- Bootstrap JavaScript  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        var images = ['rovigo.jpeg', 'rovigo_duomo.jpeg', 'rovigo_palazzoroncale.jpeg', 'rovigo_po.jpeg']; 
+        var currentIndex = 0;
+    
+        function changeBackground() {
+            currentIndex = (currentIndex + 1) % images.length;
+            var imageUrl = 'static/images/' + images[currentIndex];
+            document.getElementById('slideshow').style.backgroundImage = 'url("' + imageUrl + '")';
+        }
+    
+        // Change background every 5 seconds
+        setInterval(changeBackground, 5000);
+    </script>
+    
+    <!-- Creating Back Home button -->
+   <div class="torna-home-button">
+    <form action="{{ url_for('index')}}">
+      <button class="torna-home" type="submit">Back to Home</button>
+    </form>
+   </div>
 
 </body>
 </html>
