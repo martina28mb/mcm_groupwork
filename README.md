@@ -71,3 +71,16 @@ Bidirectional communication is established between the Frontend (Flask) and Back
 3. Open your web browser and navigate to [http://localhost:8080](http://localhost:8080) to access the `frontend` and [http://localhost:8081](http://localhost:8081) to access the `backend`.
 
 4. Click on the blocks in the home page to read informations about Veneto provinces and use the search bar to look for a city in Veneto region, in Italy. Suggested museums, if any, will be displayed below accomodations available in the city choosen.
+
+## TEST SECTION
+# Overview
+The test suite for this application is built using the pytest framework. It includes several test cases to validate the functionality of the API endpoints.
+
+# Running tests
+To execute the test suite, follow these steps:
+1. Navigate to the root directory of the application.
+2. Run the following command in your terminal:
+
+   pytest --cov=app --cov-report=html tests/
+
+This command runs the tests and generates a coverage report in HTML format.
