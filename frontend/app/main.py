@@ -43,3 +43,79 @@ def index():
     """
     # Fetch the data from the backend
     return render_template('index.html')
+
+@app.route('/padova')
+def padova():
+    """
+    Render the Padova page.
+
+    Returns:
+        str: Rendered HTML content for the Padova page.
+    """
+    return render_template('padova.html')
+
+
+@app.route('/venezia')
+def venezia():
+    """
+    Render the Venezia page.
+
+    Returns:
+        str: Rendered HTML content for the Venezia page.
+    """
+    return render_template('venezia.html')
+
+
+@app.route('/verona')
+def verona():
+    """
+    Render the Verona page.
+
+    Returns:
+        str: Rendered HTML content for the Verona page.
+    """
+    return render_template('verona.html')
+
+
+@app.route('/belluno')
+def belluno():
+    """
+    Render the Belluno page.
+
+    Returns:
+        str: Rendered HTML content for the Belluno page.
+    """
+    return render_template('belluno.html')
+
+
+@app.route('/treviso')
+def treviso():
+    """
+    Render the Treviso page.
+
+    Returns:
+        str: Rendered HTML content for the Treviso page.
+    """
+    return render_template('treviso.html')
+
+
+@app.route('/vicenza')
+def vicenza():
+    """
+    Render the Vicenza page.
+
+    Returns:
+        str: Rendered HTML content for the Vicenza page.
+    """
+    return render_template('vicenza.html')
+
+
+@app.route('/rovigo')
+def rovigo():
+    """
+    Render the Rovigo page.
+
+    Returns:
+        str: Rendered HTML content for the Rovigo page.
+    """
+    return render_template('rovigo.html')
