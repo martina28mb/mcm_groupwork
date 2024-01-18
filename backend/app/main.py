@@ -5,32 +5,14 @@ This module defines a FastAPI application that serves
 as the backend for the project.
 """
 
-from fastapi import FastAPI
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
-from datetime import datetime
+from fastapi import FastAPI, Query
+from typing import Optional
 import pandas as pd
-
-
-from .mymodules.birthdays import return_birthday, print_birthdays_str
 
 app = FastAPI()
 
-# Dictionary of birthdays
-birthdays_dictionary = {
-    'Albert Einstein': '03/14/1879',
-    'Benjamin Franklin': '01/17/1706',
-    'Ada Lovelace': '12/10/1815',
-    'Donald Trump': '06/14/1946',
-    'Rowan Atkinson': '01/6/1955'
-}
-
-df = pd.read_csv('/app/app/employees.csv')
-
-@app.get('/csv_show')
-def read_and_return_csv():
-    aux = df['Age'].values
-    return{"Age": str(aux.argmin())}
+df = pd.read_csv('/app/app/output.csv')
+df_musei = pd.read_csv('/app/app/musei_veneto.csv')
 
 @app.get('/')
 def read_root():
@@ -44,41 +26,38 @@ def read_root():
 
 
 @app.get('/query/{person_name}')
-def read_item(person_name: str):
+def read_item(
+    comune: str
+):
     """
-    Endpoint to query birthdays based on person_name.
+    Retrieve accommodation and museum information based on specified filters.
 
     Args:
-        person_name (str): The name of the person.
+        comune (str): The municipality for which to retrieve information.
+        piscina (Optional[bool]): Filter by swimming pool availability.
+        accesso_disabili (Optional[bool]): Filter by disabled access.
+        fitness (Optional[bool]): Filter by fitness facilities availability.
+        sauna (Optional[bool]): Filter by sauna availability.
+        aria_condizionata (Optional[bool]): Filter by air conditioning.
+        lago (Optional[bool]): Filter by lake availability.
 
     Returns:
-        dict: Birthday information for the provided person_name.
+        dict: Accommodation and museum information based on specified filters.
     """
-    person_name = person_name.title()  # Convert to title case for consistency
-    birthday = birthdays_dictionary.get(person_name)
-    if birthday:
-        return {"person_name": person_name, "birthday": birthday}
+    comune = comune.upper()
+
+    results = df[df['COMUNE'] == comune]
+    denominazione_alloggio = results['DENOMINAZIONE'].tolist()
+    results_musei = df_musei[df_musei['Comune'] == comune]
+    denominazione_musei = results_musei['Nome'].tolist()
+
+    result_list = []
+    for nome in zip(denominazione_alloggio):
+        result_item = {"nome": nome}
+
+        result_list.append(result_item)
+
+    if denominazione_musei or denominazione_alloggio:
+        return {"comune": comune, "risultati": result_list, "musei_consigliati": denominazione_musei}
     else:
-        return {"error": "Person not found"}
-
-
-@app.get('/module/search/{person_name}')
-def read_item_from_module(person_name: str):
-    return {return_birthday(person_name)}
-
-
-@app.get('/module/all')
-def dump_all_birthdays():
-    return {print_birthdays_str()}
-
-
-@app.get('/get-date')
-def get_date():
-    """
-    Endpoint to get the current date.
-
-    Returns:
-        dict: Current date in ISO format.
-    """
-    current_date = datetime.now().isoformat()
-    return JSONResponse(content={"date": current_date})
+        return {"error": "No results"}
