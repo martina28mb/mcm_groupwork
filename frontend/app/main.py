@@ -32,3 +32,14 @@ class QueryForm(FlaskForm):
     aria_condizionata_checkbox = BooleanField('Air conditioning')
     lago_checkbox = BooleanField('Lake')
     submit_field = SubmitField('Search')
+
+@app.route('/')
+def index():
+    """
+    Render the index page.
+
+    Returns:
+        str: Rendered HTML content for the index page.
+    """
+    # Fetch the data from the backend
+    return render_template('index.html')
