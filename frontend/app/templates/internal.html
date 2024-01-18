@@ -1,8 +1,22 @@
 <head>
 
+
+ <!-- Links to tylesheets--> 
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="static/css/internal.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
 </head>
 
 <body style="background-color: #ffffff;"></body>
+
+    <!-- Including navbar -->
+    <div class="top-bar">
+        {% include 'navbar.html' %}
+    </div>
+
 {% extends 'base.html' %}
 
 {% block title %} Internal of Frontend {% endblock %}
@@ -33,6 +47,13 @@
                 {% endif %}
             </div>
         </div>
-
+<br><br>
+   
+     <!-- Creating Back Home button -->
+   <div class="torna-home-button">
+    <form action="{{ url_for('index')}}">
+      <button class="torna-home" type="submit">Back to Home</button>
+    </form>
+   </div> 
 
 {% endblock %}
