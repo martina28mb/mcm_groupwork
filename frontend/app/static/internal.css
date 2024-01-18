@@ -1,0 +1,99 @@
+body {
+    background-color: #ffffff; 
+    color: #000000; 
+}
+
+.container {
+    width: 100%; 
+    margin: 0 auto; 
+}
+
+/* H1 style */
+h1 {
+    color: #008080; /* Main color for headers */
+}
+/* Result Display Styles */
+#resultContainer {
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+/* Ipertextual link */
+#resultContainer .custom_link{
+    color:#ffffff;
+}
+#resultContainer .custom_link:hover{
+    color:#b76df7;
+}
+
+.accommodation-list {
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.accommodation-item{
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #008080;
+    color:#ffffff;
+}
+
+.text-danger {
+    color: rgb(1, 46, 54); /* Color for error messages */
+}
+
+/* Styling the "back home" button */
+.torna-home-button{
+    text-align: center;
+   
+}
+
+.torna-home {
+    align-items: center;
+    padding: 10px; 
+    background-color: #044a4a; 
+    color: #fff; 
+    border:none;
+    border-radius: 5px; 
+    cursor: pointer; /* Change color when over*/
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Add style for mouse */
+  .torna-home:hover {
+    background-color: #044a4a83;  
+  }
+
+
+
+  .museum-item table tbody tr:nth-child(odd) {
+    background-color: #008080bf; 
+    color: white;
+}
+
+.museum-item table tbody tr:nth-child(even) {
+    background-color: #044a4acc; 
+    color: white;
+}
+.museum-item table thead th {
+    border-radius: 7px;
+    background-color: #bbb; 
+    color: #ffffff;
+    border: 0px !important; 
+}
+.accommodation-list, .museum-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.table{
+    color: white !important;
+}
+.rounded-table{
+    border-radius: 7px;
+}
+.museum-width{
+    width: 60%;
+}
