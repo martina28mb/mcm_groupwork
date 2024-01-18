@@ -55,5 +55,31 @@
         <p>Culturally, Belluno has a rich history influenced by both Italian and Austrian traditions. The town has retained its distinct character and serves as a gateway to the Dolomite region, known for its unique blend of alpine and Mediterranean cultures. Belluno's welcoming atmosphere, historical charm, and proximity to the breathtaking Dolomite landscapes make it a delightful destination for those seeking a combination of cultural exploration and outdoor adventure.</p>
     </div>
 
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        var images = ['belluno.jpeg', 'belluno_patcodolomiti.jpeg', 'belluno_dolomiti.jpeg', 'belluno_lago.jpeg']; 
+        var currentIndex = 0;
+    
+        function changeBackground() {
+            currentIndex = (currentIndex + 1) % images.length;
+            var imageUrl = 'static/images/' + images[currentIndex];
+            document.getElementById('slideshow').style.backgroundImage = 'url("' + imageUrl + '")';
+        }
+    
+        // Change background every 5 seconds
+        setInterval(changeBackground, 5000);
+   </script>
+
+   <!-- Creating Back Home button -->
+   <div class="torna-home-button">
+    <form action="{{ url_for('index')}}">
+      <button class="torna-home" type="submit">Back to Home</button>
+    </form>
+  </div>
+
 </body>
 </html>
