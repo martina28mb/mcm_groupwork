@@ -124,3 +124,18 @@ This command will generate HTML documentation for all modules in the current dir
 4. Access Generated Documentation:
 Once the command completes, some HTML files corresponding to the modules in the project will be generated. 
 Open these HTML files in your web browser to view the documentation.
+
+## LINTING WITH PYCODESTYLE
+Linting is the process of analyzing code for potential errors or stylistic issues. In order to do it, we use a tool called "pycodestyle", that checks Python code against the style conventions defined in PEP 8.
+
+1. Installation
+Make sure you have pycodestyle installed. If not, you can install it using pip:
+ pip install pycodestyle
+
+2. Run pycodestyle
+To verify the code, you have to execute in your terminal the following:
+ pycodestyle mcm_groupwork
+
+3. Check the results
+Once you execute the previous code in the terminal, you will visualize the results.
+
