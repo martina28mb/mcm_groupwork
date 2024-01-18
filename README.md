@@ -84,3 +84,25 @@ To execute the test suite, follow these steps:
    pytest --cov=app --cov-report=html tests/
 
 This command runs the tests and generates a coverage report in HTML format.
+
+# Test cases
+"test_read_main()"
+This test checks the root endpoint "/" to ensure it returns the expected response.
+
+"test_query_endpoint_success()"
+Validates the query endpoint with accurate parameters to ensure it returns the expected response.
+
+"test_query_endpoint_no_results()"
+Tests the query endpoint with a municipality that has no results, ensuring the correct response is returned.
+
+"test_query_endpoint_with_piscina()"
+Validates the query endpoint with a municipality and "piscina" parameter to return an expected response.
+
+"test_query_endpoint_with_sauna_no_link()"
+Tests the query endpoint with various parameters, including "sauna", ensuring the correct response is returned without a link.
+
+"test_query_endpoint_with_all_but_sauna()"
+Validates the query endpoint with multiple parameters except "sauna"" and ensures the expected response is returned.
+
+"test_query_endpoint_musei_only()"
+Tests the query endpoint with a municipality and "piscina"" parameter for expected responses related to museums.
