@@ -53,14 +53,44 @@ Bidirectional communication is established between the Frontend (Flask) and Back
 - Visual Studio Code (Optional, for debugging)
 
 ## Usage
-1. Clone the repository and navigate in the directory:
+
+1. Do you want to use and updated version of the datasets? Download the datasets
+
+   - Download the accomodations dataset from [this link](https://dati.veneto.it/opendata/elenco_strutture_ricettive_del_veneto?metadati=showall).
+
+   - Download the museum dataset from [this link](http://www.datiopen.it/it/opendata/Mappa_dei_musei_in_Italia).
+
+   - Prepare accomodation dataset (In this case, we used Google Colab to prepare it):
+   ```bash
+      import pandas as pd
+      from google.colab import files
+      columns_to_drop = ["INTERNO", "LOCALITA", "CATEGORIA", "ALTRI SERVIZI", "STELLE", "SOLARIUM", "CENTRO STORICO", "TIPOLOGIA SECONDARIA", "FAX", "ZONA FIERA", "SPAGNOLO", "AUTOSTRADA", "STAZIONE FS", "TIPOLOGIA", "AEROPORTO", "CAP","RISTORANTE", "TERMALE", "MARE", "COLLINARE", "NUOVA CLASSIFICAZIONE LR11", "PERIFERIA", "NUMERO CIVICO", "IMPIANTI RISALITA", "ZONA", "CODICE IDENTIFICATIVO", "SALA CONFERENZE", "TEDESCO", "FRANCESE", "DATA ULTIMA MODIFICA", "GIOCHI BIMBI", "INGLESE", "CHIUSURA TEMPORANEA"]
+      df = pd.read_csv("strutture.csv", sep=";")
+      df.drop(columns = columns_to_drop, inplace = True)
+      df.to_csv('output.csv', encoding = 'utf-8-sig')
+      files.download('output.csv')
+   ```
+   - Prepare museum dataset (In this case, we used Google Colab to prepare it):
+   ```bash
+      import pandas as pd
+      from google.colab import files
+      df = pd.read_csv("Mappa-dei-musei-in-Italia.csv", sep=";")
+      df_veneto = df[df['Regione'] == 'Veneto']
+      df_veneto.drop(columns=["Longitudine", "Latitudine", "Identificatore in OpenStreetMap", "Data e ora inserimento", "Anno inserimento"], inplace=True)
+      df_veneto = df_veneto.dropna(subset=['Nome'])
+      df_veneto.to_csv('musei_veneto.csv', encoding = 'utf-8-sig')
+      files.download('musei_veneto.csv')
+   ```
+   - Replace the old datasets with the new ones (the datasets name must be the same).
+
+2. Clone the repository and navigate in the directory:
 
     ```bash
     git clone git@github.com:martina28mb/mcm_groupwork.git
     cd mcm_groupwork
     ```
 
-2. Build and run the Docker containers:
+3. Build and run the Docker containers:
 
     ```bash
     docker-compose up --build
@@ -68,9 +98,9 @@ Bidirectional communication is established between the Frontend (Flask) and Back
 
     This will start both the frontend and backend containers.
 
-3. Open your web browser and navigate to [http://localhost:8080](http://localhost:8080) to access the `frontend` and [http://localhost:8081](http://localhost:8081) to access the `backend`.
+4. Open your web browser and navigate to [http://localhost:8080](http://localhost:8080) to access the `frontend` and [http://localhost:8081](http://localhost:8081) to access the `backend`.
 
-4. Click on the blocks in the home page to read informations about Veneto provinces and use the search bar to look for a city in Veneto region, in Italy. Suggested museums, if any, will be displayed below accomodations available in the city choosen.
+5. Click on the blocks in the home page to read informations about Veneto provinces and use the search bar to look for a city in Veneto region, in Italy. Suggested museums, if any, will be displayed below accomodations available in the city choosen.
 
 ## TEST SECTION
 # Overview
