@@ -60,17 +60,17 @@ Bidirectional communication is established between the Frontend (Flask) and Back
 
    - Download the museum dataset from [this link](http://www.datiopen.it/it/opendata/Mappa_dei_musei_in_Italia).
 
-   - Prepare accomodation dataset (In this case, we used Google Colab to prepare it):
+   - Prepare the accomodation dataset (in this case, we used Google Colab to prepare it):
    ```bash
       import pandas as pd
       from google.colab import files
       columns_to_drop = ["INTERNO", "LOCALITA", "CATEGORIA", "ALTRI SERVIZI", "STELLE", "SOLARIUM", "CENTRO STORICO", "TIPOLOGIA SECONDARIA", "FAX", "ZONA FIERA", "SPAGNOLO", "AUTOSTRADA", "STAZIONE FS", "TIPOLOGIA", "AEROPORTO", "CAP","RISTORANTE", "TERMALE", "MARE", "COLLINARE", "NUOVA CLASSIFICAZIONE LR11", "PERIFERIA", "NUMERO CIVICO", "IMPIANTI RISALITA", "ZONA", "CODICE IDENTIFICATIVO", "SALA CONFERENZE", "TEDESCO", "FRANCESE", "DATA ULTIMA MODIFICA", "GIOCHI BIMBI", "INGLESE", "CHIUSURA TEMPORANEA"]
-      df = pd.read_csv("strutture.csv", sep=";")
+      df = pd.read_csv("Elenco-delle-Strutture-Ricettive-Turistiche-della-Regione-Veneto-aggiornamento-quotidiano.csv", sep=";")
       df.drop(columns = columns_to_drop, inplace = True)
       df.to_csv('output.csv', encoding = 'utf-8-sig')
       files.download('output.csv')
    ```
-   - Prepare museum dataset (In this case, we used Google Colab to prepare it):
+   - Prepare the museum dataset (in this case, we used Google Colab to prepare it):
    ```bash
       import pandas as pd
       from google.colab import files
