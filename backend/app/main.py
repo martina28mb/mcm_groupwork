@@ -20,6 +20,8 @@ df_musei = pd.read_csv('/app/app/musei_veneto.csv')
 
 
 @app.get('/')
+
+
 def read_root():
     """
     Root endpoint for the backend.
@@ -31,7 +33,8 @@ def read_root():
 
 
 @app.get('/query/{comune}')
-# Filter by 7 variables below (True or False)
+
+
 def read_item(
     comune: str,
     piscina: Optional[bool] = Query(None),
